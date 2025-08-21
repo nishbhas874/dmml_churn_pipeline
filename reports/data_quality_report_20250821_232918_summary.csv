@@ -1,0 +1,10 @@
+Check Name,Status,Issues Count,Issues
+Basic Structure Validation,PASSED,0,None
+Missing Data Validation,PASSED,0,None
+Data Type Validation,FAILED,1,Column 'tenure' is object type but should be numerical
+Data Range Validation,FAILED,1,Column 'total_charges' contains negative values
+Duplicate Validation,FAILED,1,Found 41 duplicate rows based on key columns
+Anomaly Detection,FAILED,3,Column 'monthly_charges' has 19 statistical anomalies; Column 'total_charges' has 3 statistical anomalies; Column 'age' has 1 statistical anomalies
+Categorical Data Validation,FAILED,1,Column 'contract_type' has 1 rare categories
+Numerical Data Validation,FAILED,1,Column 'monthly_charges' is highly skewed
+Target Variable Validation,FAILED,1,Target variable has 15 missing values

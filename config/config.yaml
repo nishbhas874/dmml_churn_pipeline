@@ -1,0 +1,237 @@
+# Configuration file for Churn Prediction Pipeline
+
+# Project settings
+project_name: "churn_prediction_pipeline"
+random_state: 42
+
+# Data paths
+paths:
+  raw: "data/raw/"
+  processed: "data/processed/"
+  external: "data/external/"
+  output: "data/output/"
+
+# Data sources configuration
+sources:
+  huggingface:
+    repo_id: "mkechinov/ecommerce-behavior-data-from-multi-category-store"
+    filename: "ecommerce_churn.csv"
+    split: "train"
+  kaggle:
+    dataset: "blastchar/telco-customer-churn"
+    file: "WA_Fn-UseC_-Telco-Customer-Churn.csv"
+    api_credentials:
+      username: ""  # Add your Kaggle username
+      key: ""       # Add your Kaggle API key
+
+# Data ingestion settings
+ingestion:
+  huggingface:
+    repo_id: "mkechinov/ecommerce-behavior-data-from-multi-category-store"
+    filename: "ecommerce_churn.csv"
+    split: "train"
+  kaggle:
+    dataset: "blastchar/telco-customer-churn"
+    file: "WA_Fn-UseC_-Telco-Customer-Churn.csv"
+    api_credentials:
+      username: ""  # Add your Kaggle username
+      key: ""       # Add your Kaggle API key
+
+# Feature engineering settings
+features:
+  categorical_columns:
+    - "gender"
+    - "contract_type"
+    - "payment_method"
+    - "internet_service"
+    - "online_security"
+    - "online_backup"
+    - "device_protection"
+    - "tech_support"
+    - "streaming_tv"
+    - "streaming_movies"
+    - "paperless_billing"
+    - "partner"
+    - "dependents"
+  
+  numerical_columns:
+    - "tenure"
+    - "monthly_charges"
+    - "total_charges"
+    - "age"
+  
+  target_column: "churn"
+  
+  # Feature selection
+  feature_selection:
+    method: "mutual_info"  # Options: mutual_info, chi2, f_classif, recursive
+    k_best: 20
+  
+  # Scaling
+  scaling:
+    method: "standard"  # Options: standard, minmax, robust
+
+# Model settings
+models:
+  # Random Forest
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 2
+    min_samples_leaf: 1
+    random_state: 42
+  
+  # XGBoost
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+  
+  # Logistic Regression
+  logistic_regression:
+    C: 1.0
+    penalty: "l2"
+    solver: "liblinear"
+    random_state: 42
+  
+  # SVM
+  svm:
+    C: 1.0
+    kernel: "rbf"
+    gamma: "scale"
+    random_state: 42
+
+# Training settings
+training:
+  test_size: 0.2
+  validation_size: 0.2
+  random_state: 42
+  cv_folds: 5
+  
+  # Hyperparameter tuning
+  hyperparameter_tuning:
+    method: "grid_search"  # Options: grid_search, random_search, bayesian
+    n_iter: 50  # For random search
+
+# Evaluation metrics
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "roc_auc"
+    - "confusion_matrix"
+  
+  # Threshold optimization
+  threshold_optimization:
+    method: "f1_score"  # Options: f1_score, precision, recall, roc_auc
+
+# Logging
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}"
+  file: "logs/pipeline.log"
+
+# Storage settings
+storage:
+  type: "local"  # Options: local, aws_s3, gcs
+  
+  # Local storage configuration
+  local:
+    base_path: "data_lake"
+  
+  # AWS S3 configuration (optional)
+  aws_s3:
+    bucket_name: "your-churn-data-lake"  # Replace with your bucket name
+    region: "us-east-1"
+    # AWS credentials should be configured via AWS CLI or environment variables
+  
+  # Google Cloud Storage configuration (optional)
+  gcs:
+    bucket_name: "your-churn-data-lake"  # Replace with your bucket name
+    # GCS credentials should be configured via gcloud CLI or service account key
+
+# Data validation settings
+validation:
+  # Basic validation thresholds
+  min_rows: 100
+  high_missing_threshold: 50  # Percentage
+  rare_category_threshold: 0.01  # 1%
+  
+  # Key columns for duplicate detection
+  key_columns: ["customer_id"]
+  
+  # Data quality thresholds
+  similarity_threshold: 0.95
+  max_missing_per_row: 0.5  # 50% of columns
+  
+  # Report settings
+  generate_reports: true
+  report_formats: ["json", "csv", "html"]
+
+# Data preprocessing settings
+preprocessing:
+  # Missing value handling
+  missing_values:
+    numerical: "mean"  # Options: mean, median, mode, drop
+    categorical: "mode"  # Options: mode, unknown, drop
+  
+  # Feature encoding
+  encoding: "onehot"  # Options: onehot, label
+  
+  # Feature scaling
+  scaling: "standard"  # Options: standard, minmax, robust
+  
+  # Outlier handling
+  outliers: "iqr"  # Options: iqr, zscore, none
+  
+  # EDA settings
+  eda:
+    save_plots: true
+    plot_format: "png"
+    dpi: 300
+
+# Data transformation settings
+transformation:
+  # Feature engineering
+  apply_feature_selection: true
+  apply_pca: false
+  
+  # Feature selection
+  feature_selection: "mutual_info"  # Options: mutual_info, f_classif
+  k_best: 20
+  
+  # Scaling
+  scaling: "standard"  # Options: standard, minmax, robust
+
+# Database settings
+database:
+  type: "sqlite"  # Options: sqlite, postgresql
+  
+  # SQLite configuration
+  sqlite:
+    path: "data/churn_prediction.db"
+  
+  # PostgreSQL configuration (optional)
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "churn_prediction"
+    username: "postgres"
+    password: ""
+
+# Output settings
+output:
+  model_path: "models/"
+  results_path: "results/"
+  plots_path: "plots/"
+  
+  # Save options
+  save_model: true
+  save_predictions: true
+  save_plots: true
+  save_report: true

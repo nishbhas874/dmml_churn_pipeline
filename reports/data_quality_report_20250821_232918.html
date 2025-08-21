@@ -1,0 +1,78 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Data Quality Report - Sample Churn Dataset</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .header { background-color: #f0f0f0; padding: 20px; border-radius: 5px; }
+                .summary { background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 20px 0; }
+                .check { margin: 10px 0; padding: 10px; border-left: 4px solid #ddd; }
+                .passed { border-left-color: #4CAF50; }
+                .failed { border-left-color: #f44336; }
+                .score { font-size: 24px; font-weight: bold; color: #007bff; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Data Quality Report</h1>
+                <p><strong>Dataset:</strong> Sample Churn Dataset</p>
+                <p><strong>Generated:</strong> 2025-08-21T23:29:18.803789</p>
+                <p><strong>Dataset Shape:</strong> (1050, 21)</p>
+            </div>
+            
+            <div class="summary">
+                <h2>Summary</h2>
+                <p class="score">Quality Score: 2.22/100</p>
+                <p><strong>Total Checks:</strong> 9</p>
+                <p><strong>Passed:</strong> 2</p>
+                <p><strong>Failed:</strong> 7</p>
+                <p><strong>Total Issues:</strong> 9</p>
+                <p><strong>Critical Issues:</strong> 0</p>
+                <p><strong>Warning Issues:</strong> 4</p>
+            </div>
+            
+            <h2>Validation Checks</h2>
+        
+            <div class="check passed">
+                <h3>Basic Structure Validation - PASSED</h3>
+                <p><strong>Issues Found:</strong> 0</p>
+            </div>
+            <div class="check passed">
+                <h3>Missing Data Validation - PASSED</h3>
+                <p><strong>Issues Found:</strong> 0</p>
+            </div>
+            <div class="check failed">
+                <h3>Data Type Validation - FAILED</h3>
+                <p><strong>Issues Found:</strong> 1</p>
+            <h4>Issues:</h4><ul><li>Column 'tenure' is object type but should be numerical</li></ul></div>
+            <div class="check failed">
+                <h3>Data Range Validation - FAILED</h3>
+                <p><strong>Issues Found:</strong> 1</p>
+            <h4>Issues:</h4><ul><li>Column 'total_charges' contains negative values</li></ul></div>
+            <div class="check failed">
+                <h3>Duplicate Validation - FAILED</h3>
+                <p><strong>Issues Found:</strong> 1</p>
+            <h4>Issues:</h4><ul><li>Found 41 duplicate rows based on key columns</li></ul></div>
+            <div class="check failed">
+                <h3>Anomaly Detection - FAILED</h3>
+                <p><strong>Issues Found:</strong> 3</p>
+            <h4>Issues:</h4><ul><li>Column 'monthly_charges' has 19 statistical anomalies</li><li>Column 'total_charges' has 3 statistical anomalies</li><li>Column 'age' has 1 statistical anomalies</li></ul></div>
+            <div class="check failed">
+                <h3>Categorical Data Validation - FAILED</h3>
+                <p><strong>Issues Found:</strong> 1</p>
+            <h4>Issues:</h4><ul><li>Column 'contract_type' has 1 rare categories</li></ul></div>
+            <div class="check failed">
+                <h3>Numerical Data Validation - FAILED</h3>
+                <p><strong>Issues Found:</strong> 1</p>
+            <h4>Issues:</h4><ul><li>Column 'monthly_charges' is highly skewed</li></ul></div>
+            <div class="check failed">
+                <h3>Target Variable Validation - FAILED</h3>
+                <p><strong>Issues Found:</strong> 1</p>
+            <h4>Issues:</h4><ul><li>Target variable has 15 missing values</li></ul></div>
+            <h2>Recommendations</h2>
+            <ul>
+            <li>Review and address warning issues for better data quality</li></ul>
+        </body>
+        </html>
+        

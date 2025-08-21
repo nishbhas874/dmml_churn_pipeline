@@ -1,0 +1,16 @@
+{
+  "source": "kaggle",
+  "data_type": "raw",
+  "original_filename": "temp_kaggle_sample.csv",
+  "file_size": 1800,
+  "upload_timestamp": "2025-08-21T23:14:08.545961",
+  "partition_path": "raw/kaggle/2025/08/21/23",
+  "storage_path": "raw/kaggle/2025/08/21/23/temp_kaggle_sample.csv",
+  "file_extension": ".csv",
+  "checksum": "62b29bea89222663afc1a5fb2ddee6cb",
+  "dataset_name": "kaggle",
+  "rows": 100,
+  "columns": 6,
+  "description": "Sample churn data from kaggle",
+  "version": "1.0"
+}
