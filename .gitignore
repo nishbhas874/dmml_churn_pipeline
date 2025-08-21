@@ -135,6 +135,9 @@ data/external/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/external/.gitkeep
+!data/raw/*.dvc
+!data/processed/*.dvc
+!data/external/*.dvc
 
 logs/*
 !logs/.gitkeep
@@ -166,3 +169,6 @@ Thumbs.db
 .dvc/
 *.dvc/cache
 dvc_remote/
+
+# Allow DVC files but ignore actual data
+!*.dvc
