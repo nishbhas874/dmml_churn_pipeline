@@ -1,0 +1,11 @@
+Model: Random Forest
+Trained on: 20250822_124443
+Training samples: 5634
+Test samples: 1409
+Features: 19
+
+Performance Metrics:
+Accuracy: 0.7864
+Precision: 0.6205
+Recall: 0.5027
+F1-Score: 0.5554
