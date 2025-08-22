@@ -1,0 +1,6 @@
+artifact_location: file:///C:/Bits_Pilani/dmml_churn_pipeline/mlruns/730960086102212315
+creation_time: 1755849980156
+experiment_id: '730960086102212315'
+last_update_time: 1755849980156
+lifecycle_stage: active
+name: customer_churn_models
