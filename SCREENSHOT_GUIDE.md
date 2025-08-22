@@ -3,30 +3,22 @@
 ## 📸 Screenshots Required for Assignment Evaluation
 
 ### **Screenshot 1: Pipeline Execution Log**
-**What to capture**: Terminal output from `python run_airflow.py`
+**What to capture**: Terminal output from `python simple_prefect_demo.py`
 - ✅ Shows complete pipeline execution
-- ✅ All 9 tasks completed successfully  
+- ✅ All 5 tasks completed successfully  
 - ✅ Task dependencies clearly visible
 - ✅ Execution timeline and durations
 
-### **Screenshot 2: DAG Structure Visualization**
-**What to capture**: The visual DAG output showing:
+### **Screenshot 2: Flow Structure Visualization**
+**What to capture**: The visual flow output showing:
 ```
 data_ingestion
     ↓
 data_storage
     ↓
-data_validation
-    ↓
-quality_report
-    ↓
 data_preparation
     ↓
 feature_engineering
-    ↓
-database_setup
-    ↓
-feature_store
     ↓
 data_versioning
 ```
@@ -45,49 +37,49 @@ data_versioning
 - `mlruns/` folder with MLflow tracking
 - Git version tags in repository
 
-### **Screenshot 5: Airflow DAG File**
-**What to capture**: VS Code showing `dags/churn_pipeline_dag.py`:
-- Task definitions with BashOperator
-- Dependency chain: `task1 >> task2 >> task3...`
+### **Screenshot 5: Prefect Flow File**
+**What to capture**: VS Code showing `simple_prefect_demo.py`:
+- Task definitions with @task decorators
+- Dependency chain: `task2 = data_storage(wait_for=[task1])`
 - Error handling configuration
-- Scheduling setup
+- Flow management setup
 
 ## 🎯 **Alternative: Use Our Demonstration**
 
-Since full Airflow setup is complex, evaluators can use:
+Since full Prefect setup is complex, evaluators can use:
 
 ### **Option 1: Run Our Demo**
 ```bash
-python demo_airflow_ui.py
+python simple_prefect_demo.py
 ```
-**Shows**: Simulated Airflow UI with task execution timeline
+**Shows**: Real Prefect flow execution with task timeline
 
 ### **Option 2: View Documentation**
 **File**: `ORCHESTRATION_SCREENSHOTS.md`
-**Contains**: Detailed explanation of what Airflow UI would show
+**Contains**: Detailed explanation of what Prefect UI shows
 
 ### **Option 3: Examine Real Pipeline Logs**
 **Files**: 
-- Terminal output from `python run_airflow.py`
+- Terminal output from `python simple_prefect_demo.py`
 - Individual task logs in pipeline execution
 - Git commit history showing orchestrated runs
 
 ## 📋 **Evidence of Orchestration Requirements Met**
 
-### ✅ **DAG (Directed Acyclic Graph)**
-- **File**: `dags/churn_pipeline_dag.py`
+### ✅ **Flow (Directed Acyclic Graph)**
+- **File**: `simple_prefect_demo.py`
 - **Evidence**: Clear task dependencies defined
 - **Screenshot**: Task dependency chain visualization
 
 ### ✅ **Task Dependencies**
-- **Code**: `get_data >> store_data >> validate_data...`
+- **Code**: `task2 = data_storage(wait_for=[task1])`
 - **Evidence**: Sequential execution in logs
 - **Screenshot**: No parallel execution conflicts
 
 ### ✅ **Failure Handling**
-- **Config**: `retries=1, retry_delay=timedelta(minutes=5)`
+- **Config**: `retries=1, retry_delay_seconds=5`
 - **Evidence**: Error handling in task definitions
-- **Screenshot**: Retry configuration in DAG file
+- **Screenshot**: Retry configuration in flow file
 
 ### ✅ **Monitoring**
 - **Evidence**: Detailed execution logs for each task
@@ -103,7 +95,7 @@ git clone https://github.com/nishbhas874/dmml_churn_pipeline
 
 ### **Step 2**: Run the orchestrated pipeline
 ```bash
-python run_airflow.py
+python simple_prefect_demo.py
 ```
 
 ### **Step 3**: Observe the output
@@ -112,18 +104,18 @@ python run_airflow.py
 - Success indicators ✅
 - Generated artifacts ✅
 
-### **Step 4**: Examine the DAG file
+### **Step 4**: Examine the flow file
 ```bash
-# View the Airflow DAG definition
-cat dags/churn_pipeline_dag.py
+# View the Prefect flow definition
+cat simple_prefect_demo.py
 ```
 
 ## 📊 **Expected Results**
 
 **Evaluators should see:**
-- ✅ 9 tasks executed in correct order
+- ✅ 5 tasks executed in correct order
 - ✅ 100% success rate (0 failures)
-- ✅ ~72 second total execution time
+- ✅ ~15 second total execution time
 - ✅ All data artifacts generated
 - ✅ Professional orchestration setup
 

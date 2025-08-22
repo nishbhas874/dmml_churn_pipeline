@@ -6,5 +6,5 @@ seaborn
 kaggle
 datasets
 pyyaml
-apache-airflow
+prefect
 mlflow

@@ -31,6 +31,30 @@ def data_storage():
         print(f"❌ Data storage failed: {result.stderr}")
         return "FAILED"
 
+@task(name="Data Validation", retries=1, retry_delay_seconds=5)
+def data_validation():
+    """Validate data quality"""
+    print("🔄 Starting data validation...")
+    result = subprocess.run([sys.executable, "src/validation/check_data.py"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print("✅ Data validation completed successfully")
+        return "SUCCESS"
+    else:
+        print(f"❌ Data validation failed: {result.stderr}")
+        return "FAILED"
+
+@task(name="Quality Report", retries=1, retry_delay_seconds=5)
+def quality_report():
+    """Generate data quality reports"""
+    print("🔄 Starting quality report generation...")
+    result = subprocess.run([sys.executable, "src/validation/generate_quality_report.py"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print("✅ Quality report completed successfully")
+        return "SUCCESS"
+    else:
+        print(f"❌ Quality report failed: {result.stderr}")
+        return "FAILED"
+
 @task(name="Data Preparation", retries=1, retry_delay_seconds=5)
 def data_preparation():
     """Clean and preprocess data"""
@@ -53,6 +77,30 @@ def feature_engineering():
         return "SUCCESS"
     else:
         print(f"❌ Feature engineering failed: {result.stderr}")
+        return "FAILED"
+
+@task(name="Database Setup", retries=1, retry_delay_seconds=5)
+def database_setup():
+    """Setup SQLite database"""
+    print("🔄 Starting database setup...")
+    result = subprocess.run([sys.executable, "src/transformation/database_setup.py"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print("✅ Database setup completed successfully")
+        return "SUCCESS"
+    else:
+        print(f"❌ Database setup failed: {result.stderr}")
+        return "FAILED"
+
+@task(name="Feature Store", retries=1, retry_delay_seconds=5)
+def feature_store():
+    """Manage feature store"""
+    print("🔄 Starting feature store management...")
+    result = subprocess.run([sys.executable, "src/feature_store/manage_features.py"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print("✅ Feature store completed successfully")
+        return "SUCCESS"
+    else:
+        print(f"❌ Feature store failed: {result.stderr}")
         return "FAILED"
 
 @task(name="Data Versioning", retries=1, retry_delay_seconds=5)
@@ -88,9 +136,13 @@ def churn_pipeline():
     
     task1 = data_ingestion()
     task2 = data_storage(wait_for=[task1])
-    task3 = data_preparation(wait_for=[task2])
-    task4 = feature_engineering(wait_for=[task3])
-    task5 = data_versioning(wait_for=[task4])
+    task3 = data_validation(wait_for=[task2])
+    task4 = quality_report(wait_for=[task3])
+    task5 = data_preparation(wait_for=[task4])
+    task6 = feature_engineering(wait_for=[task5])
+    task7 = database_setup(wait_for=[task6])
+    task8 = feature_store(wait_for=[task7])
+    task9 = data_versioning(wait_for=[task8])
     
     print()
     print("=" * 70)
@@ -98,7 +150,7 @@ def churn_pipeline():
     print("=" * 70)
     
     # Return summary
-    results = [task1, task2, task3, task4, task5]
+    results = [task1, task2, task3, task4, task5, task6, task7, task8, task9]
     successful_tasks = sum(1 for result in results if result == "SUCCESS")
     
     print(f"📊 EXECUTION SUMMARY:")
@@ -121,9 +173,17 @@ def churn_pipeline():
     print("       ↓")
     print("   data_storage")
     print("       ↓")
+    print("   data_validation")
+    print("       ↓")
+    print("   quality_report")
+    print("       ↓")
     print("   data_preparation")
     print("       ↓")
     print("   feature_engineering")
+    print("       ↓")
+    print("   database_setup")
+    print("       ↓")
+    print("   feature_store")
     print("       ↓")
     print("   data_versioning")
     print()
