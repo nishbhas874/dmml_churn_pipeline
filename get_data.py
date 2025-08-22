@@ -1,8 +1,4 @@
 # get_data.py - Data Ingestion Script
-# Student: [Your Name]
-# Course: Data Mining & Machine Learning
-# Assignment: Customer Churn Pipeline
-
 import pandas as pd
 import os
 import subprocess

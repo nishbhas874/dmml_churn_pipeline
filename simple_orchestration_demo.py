@@ -1,7 +1,4 @@
 # simple_orchestration_demo.py - Visual Orchestration Demo
-# Student: [Your Name]
-# Course: Data Mining & Machine Learning
-# Assignment: Customer Churn Pipeline with Orchestration
 
 import time
 import subprocess

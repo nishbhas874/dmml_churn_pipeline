@@ -1,5 +1,5 @@
 -- Sample SQL Queries for Churn Prediction Database
--- Generated on: 2025-08-22T15:40:38.577799
+-- Generated on: 2025-08-22T20:08:10.757191
 
 -- Get High Risk Customers
 SELECT c.customer_id, c.monthly_charges, cp.churn_probability
