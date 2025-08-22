@@ -129,10 +129,16 @@ def main():
     for check, (count, issues) in validation_results.items():
         print(f"\n{check.replace('_', ' ').title()}:")
         if count == 0:
-            print("  ✅ No issues found")
+            try:
+                print("  ✅ No issues found")
+            except UnicodeEncodeError:
+                print("  [OK] No issues found")
         else:
             for issue in issues[:3]:  # Show first 3 issues
-                print(f"  ❌ {issue}")
+                try:
+                    print(f"  ❌ {issue}")
+                except UnicodeEncodeError:
+                    print(f"  [ISSUE] {issue}")
             if len(issues) > 3:
                 print(f"  ... and {len(issues) - 3} more issues")
     
