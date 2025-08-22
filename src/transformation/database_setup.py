@@ -248,9 +248,14 @@ def main():
     
     print("\n" + "=" * 40)
     print("Database setup completed!")
-    print(f"🗄️  Database: {db_path}")
-    print(f"📝 Queries: {queries_file}")
-    print(f"📊 Summary: {summary_file}")
+    try:
+        print(f"🗄️  Database: {db_path}")
+        print(f"📝 Queries: {queries_file}")
+        print(f"📊 Summary: {summary_file}")
+    except UnicodeEncodeError:
+        print(f"[DB] Database: {db_path}")
+        print(f"[QUERIES] Queries: {queries_file}")
+        print(f"[SUMMARY] Summary: {summary_file}")
     print("=" * 40)
 
 if __name__ == "__main__":
