@@ -114,9 +114,14 @@ def main():
     
     print("\n" + "=" * 40)
     print("Data Quality Report Generated Successfully!")
-    print(f"📄 CSV Report: {csv_report}")
-    print(f"📊 Summary: {summary_file}")
-    print(f"📈 Chart: {chart_file}")
+    try:
+        print(f"📄 CSV Report: {csv_report}")
+        print(f"📊 Summary: {summary_file}")
+        print(f"📈 Chart: {chart_file}")
+    except UnicodeEncodeError:
+        print(f"[CSV] CSV Report: {csv_report}")
+        print(f"[SUMMARY] Summary: {summary_file}")
+        print(f"[CHART] Chart: {chart_file}")
     print("=" * 40)
 
 if __name__ == "__main__":
