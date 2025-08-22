@@ -1,151 +1,114 @@
-# Churn Prediction Data Pipeline
+# Customer Churn Prediction Project
 
-A comprehensive machine learning pipeline for customer churn prediction using Python.
+This is our assignment project for predicting customer churn using machine learning.
 
-## Project Structure
+## What's in this project
 
 ```
 dmml_churn_pipeline/
-├── data/                   # Data storage
-│   ├── raw/               # Raw data files
-│   ├── processed/         # Processed data files
-│   └── external/          # External data sources
-├── src/                   # Source code
-│   ├── data/             # Data processing modules
-│   ├── features/         # Feature engineering
-│   ├── models/           # Model training and evaluation
-│   ├── visualization/    # Data visualization
-│   └── ingestion/        # Data ingestion from external sources
-├── notebooks/            # Jupyter notebooks
-├── tests/               # Unit tests
-├── config/              # Configuration files
-├── logs/                # Log files
-├── requirements.txt     # Python dependencies
-└── README.md           # Project documentation
+├── src/                    # Source code organized by pipeline stage
+│   ├── ingestion/         # Stage 2: Data Ingestion
+│   ├── storage/           # Stage 3: Raw Data Storage
+│   ├── validation/        # Stage 4: Data Validation
+│   ├── preparation/       # Stage 5: Data Preparation
+│   ├── transformation/    # Stage 6: Data Transformation
+│   ├── feature_store/     # Stage 7: Feature Store Management
+│   ├── versioning/        # Stage 8: Data Versioning
+│   ├── modeling/          # Stage 9: Model Building
+│   └── orchestration/     # Stage 10: Pipeline Orchestration
+├── data/                  # Data organized by pipeline stage
+│   ├── raw/               # Original data files from kaggle/huggingface
+│   ├── storage/           # Data lake storage architecture
+│   ├── validated/         # Data validation reports and checked data
+│   ├── processed/         # Cleaned and prepared data
+│   ├── transformed/       # Feature engineered data
+│   ├── features/          # Feature store with metadata
+│   └── versioned/         # Data versioning information
+├── docs/                 # Documentation files
+│   ├── PROBLEM_FORMULATION.md
+│   ├── FEATURE_STORE_DOCUMENTATION.md
+│   └── VERSIONING_STRATEGY.md
+├── assignment_docs/      # Assignment documents
+├── config/               # Settings file
+├── models/               # Trained models
+├── requirements.txt      # Python packages needed
+├── get_data.py          # Easy access to data ingestion
+├── pipeline.py          # Easy access to full pipeline
+└── README.md           # This file
 ```
 
-## Features
+## What it does
 
-- **Data Ingestion**: Automated data loading from Kaggle and Hugging Face
-- **Data Processing**: Automated data cleaning and preprocessing
-- **Feature Engineering**: Advanced feature creation and selection
-- **Model Training**: Multiple ML algorithms with hyperparameter tuning
-- **Model Evaluation**: Comprehensive evaluation metrics
-- **Pipeline Automation**: End-to-end pipeline orchestration
-- **Monitoring**: Model performance monitoring and logging
+- Gets real customer data from Kaggle and Hugging Face
+- Cleans the data and handles missing values
+- Creates new features from existing ones
+- Trains different ML models (logistic regression, random forest, etc.)
+- Evaluates which model works best
+- Makes predictions on new data
 
-## Installation
+## How to run it
 
-1. Clone the repository
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. Install dependencies:
+1. First install the required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
-## Data Ingestion
+2. Set up your Kaggle API key by putting kaggle.json file in ~/.kaggle/
 
-The pipeline supports automatic data ingestion from multiple sources:
-
-### Kaggle Data Ingestion
-
-1. **Setup Kaggle API**:
-   - Go to your Kaggle account settings
-   - Create a new API token
-   - Update `config/config.yaml` with your credentials:
-     ```yaml
-     sources:
-       kaggle:
-         dataset: "blastchar/telco-customer-churn"
-         file: "WA_Fn-UseC_-Telco-Customer-Churn.csv"
-         api_credentials:
-           username: "your_kaggle_username"
-           key: "your_kaggle_api_key"
-     ```
-
-2. **Run Kaggle ingestion**:
+3. Run the data ingestion:
    ```bash
-   python src/ingestion/unified_ingestion.py
+   python get_data.py
    ```
 
-### Hugging Face Data Ingestion
+4. Run the pipeline (choose one option):
 
-1. **Configure dataset** in `config/config.yaml`:
-   ```yaml
-   sources:
-     huggingface:
-       repo_id: "mkechinov/ecommerce-behavior-data-from-multi-category-store"
-       filename: "ecommerce_churn.csv"
-       split: "train"
-   ```
-
-2. **Run Hugging Face ingestion**:
+   **Option A: Run everything at once:**
    ```bash
-   python src/ingestion/unified_ingestion.py
+   python pipeline.py
    ```
 
-### Unified Data Ingestion
+   **Option B: Run step by step:**
+   ```bash
+   python check_data.py
+   python clean_data.py
+   python make_features.py
+   python train_model.py
+   ```
 
-Run both Kaggle and Hugging Face ingestion in a single command:
+## Getting the data
 
-```bash
-python run_ingestion.py
-```
+- Kaggle: Telco Customer Churn dataset (blastchar/telco-customer-churn)
+- Hugging Face: E-commerce customer behavior data
 
-This will:
-- Try to download data from Kaggle (if credentials are configured)
-- Try to download data from Hugging Face
-- Select the best available data source
-- Provide a summary of ingested files
+## The pipeline steps
 
-## Usage
+1. **Data Ingestion** - Downloads from kaggle or huggingface → `data/raw/`
+2. **Raw Data Storage** - Data lake architecture → `data/storage/`
+3. **Data Validation** - Check data quality and consistency → `data/validated/`
+4. **Data Preparation** - Handle missing values, fix data types → `data/processed/`
+5. **Data Transformation** - Create new features → `data/transformed/`
+6. **Feature Store** - Manage engineered features → `data/features/`
+7. **Data Versioning** - Track data changes → `data/versioned/`
+8. **Model Building** - Train different algorithms → `models/`
+9. **Orchestration** - Run everything automatically via `pipeline.py`
 
-### 1. Data Ingestion Only:
-```bash
-python run_ingestion.py
-```
+## Files you might want to look at
 
-### 2. Data Preparation:
-```bash
-python src/data/data_processor.py
-```
+**Main Scripts:**
+- `get_data.py` - Easy access to data ingestion
+- `pipeline.py` - Easy access to full pipeline
 
-### 3. Feature Engineering:
-```bash
-python src/features/feature_engineer.py
-```
+**Source Code (organized by stage):**
+- `src/ingestion/get_data.py` - Downloads data from kaggle and huggingface
+- `src/validation/check_data.py` - Checks data quality
+- `src/preparation/clean_data.py` - Cleans the data
+- `src/transformation/make_features.py` - Creates new features
+- `src/feature_store/manage_features.py` - Manages feature store with metadata
+- `src/versioning/version_data.py` - Tracks data changes and versions
+- `src/modeling/train_model.py` - Trains the ML models
+- `src/orchestration/pipeline.py` - Full pipeline orchestration
 
-### 4. Model Training:
-```bash
-python src/models/train_model.py
-```
+## Notes
 
-### 5. Run Complete Pipeline:
-```bash
-python run_pipeline.py
-```
-
-## Configuration
-
-Edit `config/config.yaml` to customize:
-- Data sources (Kaggle, Hugging Face)
-- API credentials
-- Model parameters
-- Feature engineering settings
-- Evaluation metrics
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## License
-
-MIT License
+- The config file `config/config.yaml` has all the settings
+- We tried to make it modular so each part can work independently

@@ -1,6 +1,0 @@
-[core]
-    remote = origin
-['remote "local"']
-    url = ../dvc_remote
-['remote "origin"']
-    url = https://github.com/nishbhas874/dvc-storage
