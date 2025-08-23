@@ -1,0 +1,34 @@
+CUSTOMER CHURN PREDICTION - MODEL PERFORMANCE REPORT
+============================================================
+Generated on: 2025-08-23 11:34:08
+Dataset: 7043 total samples
+Features: 19
+Churn rate: 26.54%
+
+MODELS TRAINED:
+--------------------
+• Logistic Regression
+• Random Forest
+• Decision Tree
+
+PERFORMANCE COMPARISON:
+-------------------------
+Model                Accuracy   Precision  Recall     F1-Score  
+------------------------------------------------------------
+Logistic Regression  0.801      0.644      0.556      0.597     
+Random Forest        0.786      0.620      0.503      0.555     
+Decision Tree        0.768      0.566      0.537      0.551     
+
+BEST PERFORMING MODEL:
+----------------------
+Model: Logistic Regression
+Accuracy: 0.8006
+Precision: 0.6440
+Recall: 0.5561
+F1-Score: 0.5968
+
+MODEL FILES SAVED:
+------------------
+• models/logistic_regression_20250823_113338.pkl
+• models/random_forest_20250823_113338.pkl
+• models/decision_tree_20250823_113338.pkl
