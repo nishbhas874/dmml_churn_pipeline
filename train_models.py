@@ -194,7 +194,7 @@ print(f"   >> F1-Score: {best_metrics['f1_score']:.3f}")
 
 # Step 7: Save the models with MLflow versioning
 print()
-print("💾 Saving trained models with MLflow versioning...")
+print("** Saving trained models with MLflow versioning...")
 os.makedirs("models", exist_ok=True)
 
 # Simple MLflow setup (student-friendly)
@@ -235,7 +235,7 @@ for model_name, model in models.items():
 
 # Step 8: Create performance report
 print()
-print("📄 Creating model performance report...")
+print("** Creating model performance report...")
 report_filename = f"model_performance_report_{timestamp}.txt"
 
 with open(report_filename, 'w') as f:
