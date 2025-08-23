@@ -115,6 +115,18 @@ def data_versioning():
         print(f"❌ Data versioning failed: {result.stderr}")
         return "FAILED"
 
+@task(name="Model Training", retries=1, retry_delay_seconds=5)
+def model_training():
+    """Train machine learning models for churn prediction"""
+    print("🔄 Starting model training...")
+    result = subprocess.run([sys.executable, "train_models.py"], capture_output=True, text=True)
+    if result.returncode == 0:
+        print("✅ Model training completed successfully")
+        return "SUCCESS"
+    else:
+        print(f"❌ Model training failed: {result.stderr}")
+        return "FAILED"
+
 @flow(name="Customer Churn Pipeline", description="Complete ML pipeline for customer churn prediction")
 def churn_pipeline():
     """
@@ -143,6 +155,7 @@ def churn_pipeline():
     task7 = database_setup(wait_for=[task6])
     task8 = feature_store(wait_for=[task7])
     task9 = data_versioning(wait_for=[task8])
+    task10 = model_training(wait_for=[task9])
     
     print()
     print("=" * 70)
@@ -150,7 +163,7 @@ def churn_pipeline():
     print("=" * 70)
     
     # Return summary
-    results = [task1, task2, task3, task4, task5, task6, task7, task8, task9]
+    results = [task1, task2, task3, task4, task5, task6, task7, task8, task9, task10]
     successful_tasks = sum(1 for result in results if result == "SUCCESS")
     
     print(f"📊 EXECUTION SUMMARY:")
@@ -186,6 +199,8 @@ def churn_pipeline():
     print("   feature_store")
     print("       ↓")
     print("   data_versioning")
+    print("       ↓")
+    print("   model_training")
     print()
     
     return {
