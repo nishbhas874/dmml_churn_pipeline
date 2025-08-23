@@ -14,7 +14,7 @@ import pickle
 import os
 from datetime import datetime
 
-print("🤖 Customer Churn Model Training")
+print("*** Customer Churn Model Training ***")
 print("=" * 40)
 print("We will train different ML models and see which one works best!")
 print()
