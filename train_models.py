@@ -35,7 +35,7 @@ except:
 
 # Step 2: Prepare features and target
 print()
-print("🔧 Preparing features and target variable...")
+print("** Preparing features and target variable...")
 
 # Remove columns we don't need for modeling
 columns_to_remove = ['customerID']  # ID columns
@@ -59,7 +59,7 @@ print(f"   Churn rate: {y.mean():.2%}")
 
 # Step 3: Handle categorical variables (simple approach)
 print()
-print("🔧 Converting categorical variables to numbers...")
+print("** Converting categorical variables to numbers...")
 
 # Convert categorical columns to numeric using simple encoding
 for column in X.columns:
@@ -87,7 +87,7 @@ print(f"   Test churn rate: {y_test.mean():.2%}")
 
 # Step 5: Train different models
 print()
-print("🚀 Training different machine learning models...")
+print("** Training different machine learning models...")
 print("We'll try 3 different algorithms and see which works best!")
 
 # Create a dictionary to store our models and results
@@ -289,7 +289,7 @@ for i in range(len(sample_data)):
     print(f"   Customer {i+1}: {churn_status} (Confidence: {confidence:.2%})")
 
 print()
-print("🎉 MODEL TRAINING COMPLETED!")
+print("** MODEL TRAINING COMPLETED!")
 print("=" * 40)
 print(f"[OK] Trained {len(models)} different models")
 print(f"[OK] Best model: {best_model_name.replace('_', ' ').title()}")
