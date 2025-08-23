@@ -96,7 +96,7 @@ results = {}
 
 # Model 1: Logistic Regression
 print()
-print("1️⃣ Training Logistic Regression...")
+print("1. Training Logistic Regression...")
 lr_model = LogisticRegression(random_state=42, max_iter=1000)
 lr_model.fit(X_train, y_train)
 lr_predictions = lr_model.predict(X_test)
@@ -121,7 +121,7 @@ print(f"      F1-Score: {lr_f1:.3f}")
 
 # Model 2: Random Forest
 print()
-print("2️⃣ Training Random Forest...")
+print("2. Training Random Forest...")
 rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 rf_model.fit(X_train, y_train)
 rf_predictions = rf_model.predict(X_test)
@@ -146,7 +146,7 @@ print(f"      F1-Score: {rf_f1:.3f}")
 
 # Model 3: Decision Tree
 print()
-print("3️⃣ Training Decision Tree...")
+print("3. Training Decision Tree...")
 dt_model = DecisionTreeClassifier(random_state=42, max_depth=10)
 dt_model.fit(X_train, y_train)
 dt_predictions = dt_model.predict(X_test)
