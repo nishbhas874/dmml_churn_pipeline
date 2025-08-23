@@ -186,11 +186,11 @@ best_model = models[best_model_name]
 best_metrics = results[best_model_name]
 
 print()
-print(f"🏆 BEST MODEL: {best_model_name.replace('_', ' ').title()}")
-    print(f"   >> Accuracy: {best_metrics['accuracy']:.3f}")
-    print(f"   >> Precision: {best_metrics['precision']:.3f}")
-    print(f"   >> Recall: {best_metrics['recall']:.3f}")
-    print(f"   >> F1-Score: {best_metrics['f1_score']:.3f}")
+print(f">> BEST MODEL: {best_model_name.replace('_', ' ').title()}")
+print(f"   >> Accuracy: {best_metrics['accuracy']:.3f}")
+print(f"   >> Precision: {best_metrics['precision']:.3f}")
+print(f"   >> Recall: {best_metrics['recall']:.3f}")
+print(f"   >> F1-Score: {best_metrics['f1_score']:.3f}")
 
 # Step 7: Save the models with MLflow versioning
 print()
