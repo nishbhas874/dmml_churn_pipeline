@@ -20,7 +20,7 @@ print("We will train different ML models and see which one works best!")
 print()
 
 # Step 1: Load our prepared data
-print("📊 Loading the cleaned data...")
+print(">> Loading the cleaned data...")
 try:
     # Find the latest cleaned data file
     data_files = [f for f in os.listdir("data/processed/") if f.startswith("cleaned_kaggle_data")]
@@ -74,7 +74,7 @@ print("✅ All categorical variables converted to numbers")
 
 # Step 4: Split data into training and testing sets
 print()
-print("📊 Splitting data into train and test sets...")
+print(">> Splitting data into train and test sets...")
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
@@ -171,7 +171,7 @@ print(f"      F1-Score: {dt_f1:.3f}")
 
 # Step 6: Compare all models
 print()
-print("📊 MODEL PERFORMANCE COMPARISON")
+print(">> MODEL PERFORMANCE COMPARISON")
 print("=" * 50)
 print(f"{'Model':<20} {'Accuracy':<10} {'Precision':<10} {'Recall':<10} {'F1-Score':<10}")
 print("-" * 60)
@@ -187,10 +187,10 @@ best_metrics = results[best_model_name]
 
 print()
 print(f"🏆 BEST MODEL: {best_model_name.replace('_', ' ').title()}")
-print(f"   📈 Accuracy: {best_metrics['accuracy']:.3f}")
-print(f"   📈 Precision: {best_metrics['precision']:.3f}")
-print(f"   📈 Recall: {best_metrics['recall']:.3f}")
-print(f"   📈 F1-Score: {best_metrics['f1_score']:.3f}")
+    print(f"   >> Accuracy: {best_metrics['accuracy']:.3f}")
+    print(f"   >> Precision: {best_metrics['precision']:.3f}")
+    print(f"   >> Recall: {best_metrics['recall']:.3f}")
+    print(f"   >> F1-Score: {best_metrics['f1_score']:.3f}")
 
 # Step 7: Save the models with MLflow versioning
 print()
