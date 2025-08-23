@@ -277,7 +277,7 @@ print(f"   [OK] Report saved: {report_filename}")
 
 # Step 9: Test prediction on a few samples
 print()
-print("🔮 Testing prediction on sample data...")
+print("** Testing prediction on sample data...")
 sample_data = X_test.head(3)
 sample_predictions = best_model.predict(sample_data)
 sample_probabilities = best_model.predict_proba(sample_data)[:, 1]  # Probability of churn
