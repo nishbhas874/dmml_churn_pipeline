@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Bits_Pilani/dmml_churn_pipeline/mlruns/730960086102212315/models/m-a1e342a23d384db2b2c426d4cf1403e0/artifacts
+creation_timestamp: 1755934138152
+experiment_id: '730960086102212315'
+last_updated_timestamp: 1755934144487
+model_id: m-a1e342a23d384db2b2c426d4cf1403e0
+model_type: null
+name: churn_model_random_forest
+source_run_id: 593caa27b00646cbb77b081b26ca3c3a
+status: 2
+status_message: null
