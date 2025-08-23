@@ -27,10 +27,10 @@ try:
     latest_file = sorted(data_files)[-1]  # Get the most recent one
     
     df = pd.read_csv(f"data/processed/{latest_file}")
-    print(f"✅ Loaded data: {len(df)} rows, {len(df.columns)} columns")
+    print(f"[OK] Loaded data: {len(df)} rows, {len(df.columns)} columns")
     print(f"   File: {latest_file}")
 except:
-    print("❌ Could not find cleaned data. Please run the pipeline first!")
+    print("[ERROR] Could not find cleaned data. Please run the pipeline first!")
     exit()
 
 # Step 2: Prepare features and target
@@ -45,7 +45,7 @@ if 'customerID' in df.columns:
 # Our target variable is 'Churn' 
 target_column = 'Churn'
 if target_column not in df.columns:
-    print(f"❌ Target column '{target_column}' not found!")
+    print(f"[ERROR] Target column '{target_column}' not found!")
     print(f"Available columns: {list(df.columns)}")
     exit()
 
@@ -53,8 +53,8 @@ if target_column not in df.columns:
 X = df.drop(target_column, axis=1)
 y = df[target_column]
 
-print(f"✅ Features prepared: {len(X.columns)} features")
-print(f"✅ Target prepared: {len(y)} samples")
+print(f"[OK] Features prepared: {len(X.columns)} features")
+print(f"[OK] Target prepared: {len(y)} samples")
 print(f"   Churn rate: {y.mean():.2%}")
 
 # Step 3: Handle categorical variables (simple approach)
@@ -70,7 +70,7 @@ for column in X.columns:
         X[column] = X[column].map(value_map)
         print(f"   Encoded {column}: {len(unique_values)} categories")
 
-print("✅ All categorical variables converted to numbers")
+print("[OK] All categorical variables converted to numbers")
 
 # Step 4: Split data into training and testing sets
 print()
@@ -79,7 +79,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-print(f"✅ Data split completed:")
+print(f"[OK] Data split completed:")
 print(f"   Training set: {len(X_train)} samples")
 print(f"   Test set: {len(X_test)} samples")
 print(f"   Train churn rate: {y_train.mean():.2%}")
@@ -115,7 +115,7 @@ results['logistic_regression'] = {
     'f1_score': lr_f1
 }
 
-print(f"   ✅ Logistic Regression trained!")
+print(f"   [OK] Logistic Regression trained!")
 print(f"      Accuracy: {lr_accuracy:.3f}")
 print(f"      F1-Score: {lr_f1:.3f}")
 
@@ -140,7 +140,7 @@ results['random_forest'] = {
     'f1_score': rf_f1
 }
 
-print(f"   ✅ Random Forest trained!")
+print(f"   [OK] Random Forest trained!")
 print(f"      Accuracy: {rf_accuracy:.3f}")
 print(f"      F1-Score: {rf_f1:.3f}")
 
@@ -165,7 +165,7 @@ results['decision_tree'] = {
     'f1_score': dt_f1
 }
 
-print(f"   ✅ Decision Tree trained!")
+print(f"   [OK] Decision Tree trained!")
 print(f"      Accuracy: {dt_accuracy:.3f}")
 print(f"      F1-Score: {dt_f1:.3f}")
 
@@ -230,8 +230,8 @@ for model_name, model in models.items():
         mlflow.sklearn.log_model(model, f"churn_model_{model_name}")
     
     saved_models.append(model_filename)
-    print(f"   ✅ Saved: {model_filename}")
-    print(f"   ✅ MLflow: {model_name} versioned")
+    print(f"   [OK] Saved: {model_filename}")
+    print(f"   [OK] MLflow: {model_name} versioned")
 
 # Step 8: Create performance report
 print()
@@ -273,7 +273,7 @@ with open(report_filename, 'w') as f:
     for model_file in saved_models:
         f.write(f"• {model_file}\n")
 
-print(f"   ✅ Report saved: {report_filename}")
+print(f"   [OK] Report saved: {report_filename}")
 
 # Step 9: Test prediction on a few samples
 print()
@@ -291,10 +291,10 @@ for i in range(len(sample_data)):
 print()
 print("🎉 MODEL TRAINING COMPLETED!")
 print("=" * 40)
-print(f"✅ Trained {len(models)} different models")
-print(f"✅ Best model: {best_model_name.replace('_', ' ').title()}")
-print(f"✅ Best F1-Score: {best_metrics['f1_score']:.3f}")
-print(f"✅ Models saved in: models/ folder")
-print(f"✅ Performance report: {report_filename}")
+print(f"[OK] Trained {len(models)} different models")
+print(f"[OK] Best model: {best_model_name.replace('_', ' ').title()}")
+print(f"[OK] Best F1-Score: {best_metrics['f1_score']:.3f}")
+print(f"[OK] Models saved in: models/ folder")
+print(f"[OK] Performance report: {report_filename}")
 print()
 print("Next steps: Use the best model to predict churn for new customers!")
