@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Bits_Pilani/dmml_churn_pipeline/mlruns/730960086102212315/models/m-3a312127da284a088e181d6439b5d465/artifacts
+creation_timestamp: 1755929501322
+experiment_id: '730960086102212315'
+last_updated_timestamp: 1755929514363
+model_id: m-3a312127da284a088e181d6439b5d465
+model_type: null
+name: churn_model_logistic_regression
+source_run_id: a7c9a483f3bd44778c46678fd4270535
+status: 2
+status_message: null
