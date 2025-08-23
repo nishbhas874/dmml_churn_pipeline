@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Bits_Pilani/dmml_churn_pipeline/mlruns/730960086102212315/192e3a51898a4dc3965609c279eed4cd/artifacts
+end_time: 1755934976542
+entry_point_name: ''
+experiment_id: '730960086102212315'
+lifecycle_stage: active
+run_id: 192e3a51898a4dc3965609c279eed4cd
+run_name: decision_tree_20250823_131229
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755934970086
+status: 3
+tags: []
+user_id: nisha
