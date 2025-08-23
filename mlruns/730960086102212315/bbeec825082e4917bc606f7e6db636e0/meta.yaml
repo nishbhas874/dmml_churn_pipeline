@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Bits_Pilani/dmml_churn_pipeline/mlruns/730960086102212315/bbeec825082e4917bc606f7e6db636e0/artifacts
+end_time: 1755929344898
+entry_point_name: ''
+experiment_id: '730960086102212315'
+lifecycle_stage: active
+run_id: bbeec825082e4917bc606f7e6db636e0
+run_name: logistic_regression_20250823_113850
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755929331631
+status: 3
+tags: []
+user_id: nisha
